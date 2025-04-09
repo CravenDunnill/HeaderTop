@@ -1,0 +1,135 @@
+<?php
+/**
+ * @package     CravenDunnill_HeaderTop
+ * @var \CravenDunnill\HeaderTop\Block\Adminhtml\Form\Field\Links $block
+ */
+?>
+<div class="grid" id="<?= $block->getHtmlId() ?>">
+	<div class="admin__control-table-wrapper">
+		<table class="admin__control-table" id="<?= $block->getHtmlId() ?>_table">
+			<thead>
+				<tr>
+					<?php foreach ($block->getColumns() as $columnName => $column): ?>
+						<th><?= $block->escapeHtml($column['label']) ?></th>
+					<?php endforeach; ?>
+					<th class="col-actions" colspan="1"><?= $block->escapeHtml(__('Action')) ?></th>
+				</tr>
+			</thead>
+			<tbody id="<?= $block->getHtmlId() ?>_container"></tbody>
+			<tfoot>
+				<tr>
+					<td colspan="<?= count($block->getColumns()) + 1 ?>" class="col-actions-add">
+						<button id="<?= $block->getHtmlId() ?>_add" class="action-add" title="<?= $block->escapeHtmlAttr(__('Add')) ?>" type="button">
+							<span><?= $block->escapeHtml($block->getAddButtonLabel()) ?></span>
+						</button>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+	<input type="hidden" name="<?= $block->getElement()->getName() ?>[__empty]" value="" />
+</div>
+
+<script>
+require([
+	'mage/template',
+	'prototype',
+	'mage/adminhtml/form',
+	'jquery',
+	'Magento_Ui/js/modal/alert'
+], function (mageTemplate, prototype, form, $, alert) {
+	var linksRowTemplate = '<tr id="<%- _id %>">' +
+		<?php foreach ($block->getColumns() as $columnName => $column): ?>
+			'<td>' +
+				<?php if ($columnName === 'custom_color'): ?>
+					'<div class="admin__field-control">' +
+						'<input class="input-text admin__control-text" type="text" id="<%- _id %>_<?= $columnName ?>" name="<?= $block->getElement()->getName() ?>[<%- _id %>][<?= $columnName ?>]" value="<%- <?= $columnName ?> %>" <%= inputDisabled %> />' +
+						'<button type="button" class="action-colorpicker" data-id="<%- _id %>_<?= $columnName ?>" data-colorpickertarget="<%- _id %>_<?= $columnName ?>"><span><?= __('Select Color') ?></span></button>' +
+					'</div>' +
+				<?php else: ?>
+					'<input class="input-text admin__control-text <?= isset($column['class']) ? $column['class'] : '' ?>" type="text" id="<%- _id %>_<?= $columnName ?>" name="<?= $block->getElement()->getName() ?>[<%- _id %>][<?= $columnName ?>]" value="<%- <?= $columnName ?> %>" <%= inputDisabled %> />' +
+				<?php endif; ?>
+			'</td>' +
+		<?php endforeach; ?>
+		'<td class="col-actions">' +
+			'<button id="<%- _id %>_delete" onclick="linksControl.deleteItem(\'<%- _id %>\')" class="action-delete" type="button">' +
+				'<span><?= $block->escapeHtml(__('Delete')) ?></span>' +
+			'</button>' +
+		'</td>' +
+	'</tr>';
+
+	var linksControl = {
+		template: mageTemplate(linksRowTemplate),
+		itemCount: 0,
+		addItem: function (rowData) {
+			var data = {},
+				_id;
+
+			if (rowData) {
+				_id = rowData._id;
+				data = Object.assign({}, rowData);
+			} else {
+				_id = 'link_' + this.itemCount;
+				data = {
+					_id: _id,
+					<?php foreach ($block->getColumns() as $columnName => $column): ?>
+					<?= $columnName ?>: '',
+					<?php endforeach; ?>
+					inputDisabled: ''
+				};
+			}
+
+			if (!this.itemCount) {
+				this.itemCount = $('<?= $block->getHtmlId() ?>_table tbody tr').length;
+			}
+			this.itemCount++;
+
+			var html = this.template({
+				data: data
+			});
+			
+			Element.insert($('<?= $block->getHtmlId() ?>_container'), {
+				bottom: html
+			});
+			
+			// Init color picker for new row
+			var colorPickerButton = $('#' + _id + '_custom_color').next('.action-colorpicker');
+			if (colorPickerButton.length) {
+				$('#' + _id + '_custom_color').spectrum({
+					showInput: true,
+					showInitial: true,
+					showPalette: true,
+					showSelectionPalette: true,
+					maxSelectionSize: 10,
+					preferredFormat: 'hex',
+					palette: []
+				});
+			}
+		},
+		deleteItem: function (id) {
+			$('#' + id).remove();
+		}
+	};
+
+	// Add existing items
+	<?php 
+	$items = $block->getArrayRows();
+	if (count($items)): 
+	?>
+	<?php foreach ($items as $rowId => $row): ?>
+		linksControl.addItem({
+			_id: '<?= $block->escapeJs($rowId) ?>',
+			<?php foreach ($block->getColumns() as $columnName => $column): ?>
+			<?= $columnName ?>: '<?= $block->escapeJs($row->getData($columnName)) ?>',
+			<?php endforeach; ?>
+			inputDisabled: ''
+		});
+	<?php endforeach; ?>
+	<?php endif; ?>
+
+	// Add new item button
+	$('#<?= $block->getHtmlId() ?>_add').click(function () {
+		linksControl.addItem();
+	});
+});
+</script>

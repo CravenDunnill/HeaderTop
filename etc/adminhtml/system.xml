@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="cravendunnill" translate="label" sortOrder="300">
+			<label>Craven Dunnill</label>
+		</tab>
+		<section id="cravendunnill_headertop" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+			<label>Header Top</label>
+			<tab>cravendunnill</tab>
+			<resource>CravenDunnill_HeaderTop::config</resource>
+			<group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>General Settings</label>
+				<field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Enable Header Top</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="display_on" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Display On</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<comment>Header top will only be displayed on desktop devices.</comment>
+				</field>
+			</group>
+			<group id="styles" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Style Settings</label>
+				<field id="background_color" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Background Color</label>
+					<comment>Enter a valid CSS color (e.g., #333333 or rgb(51, 51, 51))</comment>
+				</field>
+				<field id="text_color" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Text Color</label>
+					<comment>Enter a valid CSS color (e.g., #FFFFFF or rgb(255, 255, 255))</comment>
+				</field>
+				<field id="link_color" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Link Color</label>
+					<comment>Enter a valid CSS color (e.g., #FFFFFF or rgb(255, 255, 255))</comment>
+				</field>
+				<field id="link_hover_color" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Link Hover Color</label>
+					<comment>Enter a valid CSS color (e.g., #CCCCCC or rgb(204, 204, 204))</comment>
+				</field>
+			</group>
+			<group id="contact" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Contact Information</label>
+				<field id="phone_number" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Phone Number</label>
+				</field>
+				<field id="mon_enabled" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Monday Open</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="mon_open_time" translate="label" type="select" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Monday Open Time</label>
+					<source_model>CravenDunnill\HeaderTop\Model\Config\Source\TimeOptions</source_model>
+					<depends>
+						<field id="mon_enabled">1</field>
+					</depends>
+				</field>
+				<field id="mon_close_time" translate="label" type="select" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Monday Close Time</label>
+					<source_model>CravenDunnill\HeaderTop\Model\Config\Source\TimeOptions</source_model>
+					<depends>
+						<field id="mon_enabled">1</field>
+					</depends>
+				</field>
+				<field id="tue_enabled" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Tuesday Open</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="tue_open_time" translate="label" type="select" sortOrder="31" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Tuesday Open Time</label>
+					<source_model>CravenDunnill\HeaderTop\Model\Config\Source\TimeOptions</source_model>
+					<depends>
+						<field id="tue_enabled">1</field>
+					</depends>
+				</field>
+				<field id="tue_close_time" translate="label" type="select" sortOrder="32" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Tuesday Close Time</label>
+					<source_model>CravenDunnill\HeaderTop\Model\Config\Source\TimeOptions</source_model>
+					<depends>
+						<field id="tue_enabled">1</field>
+					</depends>
+				</field>
+				<field id="wed_enabled" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Wednesday Open</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="wed_open_time" translate="label" type="select" sortOrder="41" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Wednesday Open Time</label>
+					<source_model>CravenDunnill\HeaderTop\Model\Config\Source\TimeOptions</source_model>
+					<depends>
+						<field id="wed_enabled">1</field>
+					</depends>
+				</field>
+				<field id="wed_close_time" translate="label" type="select" sortOrder="42" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Wednesday Close Time</label>
+					<source_model>CravenDunnill\HeaderTop\Model\Config\Source\TimeOptions</source_model>
+					<depends>
+						<field id="wed_enabled">1</field>
+					</depends>
+				</field>
+				<field id="thu_enabled" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Thursday Open</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="thu_open_time" translate="label" type="select" sortOrder="51" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Thursday Open Time</label>
+					<source_model>CravenDunnill\HeaderTop\Model\Config\Source\TimeOptions</source_model>
+					<depends>
+						<field id="thu_enabled">1</field>
+					</depends>
+				</field>
+				<field id="thu_close_time" translate="label" type="select" sortOrder="52" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Thursday Close Time</label>
+					<source_model>CravenDunnill\HeaderTop\Model\Config\Source\TimeOptions</source_model>
+					<depends>
+						<field id="thu_enabled">1</field>
+					</depends>
+				</field>
+				<field id="fri_enabled" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Friday Open</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="fri_open_time" translate="label" type="select" sortOrder="61" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Friday Open Time</label>
+					<source_model>CravenDunnill\HeaderTop\Model\Config\Source\TimeOptions</source_model>
+					<depends>
+						<field id="fri_enabled">1</field>
+					</depends>
+				</field>
+				<field id="fri_close_time" translate="label" type="select" sortOrder="62" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Friday Close Time</label>
+					<source_model>CravenDunnill\HeaderTop\Model\Config\Source\TimeOptions</source_model>
+					<depends>
+						<field id="fri_enabled">1</field>
+					</depends>
+				</field>
+				<field id="sat_enabled" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Saturday Open</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="sat_open_time" translate="label" type="select" sortOrder="71" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Saturday Open Time</label>
+					<source_model>CravenDunnill\HeaderTop\Model\Config\Source\TimeOptions</source_model>
+					<depends>
+						<field id="sat_enabled">1</field>
+					</depends>
+				</field>
+				<field id="sat_close_time" translate="label" type="select" sortOrder="72" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Saturday Close Time</label>
+					<source_model>CravenDunnill\HeaderTop\Model\Config\Source\TimeOptions</source_model>
+					<depends>
+						<field id="sat_enabled">1</field>
+					</depends>
+				</field>
+				<field id="sun_enabled" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Sunday Open</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="sun_open_time" translate="label" type="select" sortOrder="81" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Sunday Open Time</label>
+					<source_model>CravenDunnill\HeaderTop\Model\Config\Source\TimeOptions</source_model>
+					<depends>
+						<field id="sun_enabled">1</field>
+					</depends>
+				</field>
+				<field id="sun_close_time" translate="label" type="select" sortOrder="82" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Sunday Close Time</label>
+					<source_model>CravenDunnill\HeaderTop\Model\Config\Source\TimeOptions</source_model>
+					<depends>
+						<field id="sun_enabled">1</field>
+					</depends>
+				</field>
+				<field id="open_message" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Open Message Format</label>
+					<comment>Use %phone% for phone number. Example: "Lines open until %close_time%: %phone%"</comment>
+				</field>
+				<field id="closed_message" translate="label" type="text" sortOrder="91" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+					<label>Closed Message Format</label>
+					<comment>Use %phone% for phone number, %next_day% for next open day, %open_time% for next open time. Example: "Lines open %next_day% from %open_time%: %phone%"</comment>
+				</field>
+			</group>
+			<group id="links" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+				<label>Custom Links</label>
+				<field id="links_config" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Manage Links</label>
+					<frontend_model>CravenDunnill\HeaderTop\Block\Adminhtml\Form\Field\Links</frontend_model>
+					<backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

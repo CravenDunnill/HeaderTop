@@ -1,0 +1,39 @@
+// Define root variables
+:root {
+	--container-max-width: 1280px;
+}
+
+// Base styles for all media
+.header-top {
+	display: none;
+	width: 100%;
+}
+
+.header-top__container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	max-width: var(--container-max-width);
+	margin: 0 auto;
+	padding: 0.5rem 1rem;
+}
+
+.header-top__contact {
+	display: flex;
+	align-items: center;
+}
+
+.header-top__links {
+	display: flex;
+	align-items: center;
+	gap: 1.5rem;
+}
+
+// Media query for desktop
+@media screen and (min-width: 768px) {
+	.header-top {
+		display: block;
+	}
+}

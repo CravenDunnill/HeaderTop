@@ -1,0 +1,73 @@
+<?php
+/**
+ * @package     CravenDunnill_HeaderTop
+ * @var \CravenDunnill\HeaderTop\Block\HeaderTop $block
+ */
+?>
+<?php if ($block->isEnabled()): ?>
+	<style>
+		.header-top {
+			<?= $block->getCustomStyles(); ?>
+			display: none;
+		}
+		
+		.header-top a {
+			<?= $block->getLinkStyles(); ?>
+			text-decoration: none;
+			transition: color 0.3s ease;
+		}
+		
+		.header-top a:hover {
+			<?= $block->getLinkHoverStyles(); ?>
+		}
+		
+		@media (min-width: 768px) {
+			.header-top {
+				display: block;
+			}
+		}
+		
+		.header-top__container {
+			width: 100%;
+			max-width: var(--container-max-width, 1280px);
+			margin: 0 auto;
+			padding: 0.5rem 1rem;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		
+		.header-top__contact {
+			display: flex;
+			align-items: center;
+		}
+		
+		.header-top__links {
+			display: flex;
+			align-items: center;
+		}
+		
+		.header-top__links a {
+			margin-left: 1.5rem;
+		}
+	</style>
+	
+	<div class="header-top">
+		<div class="header-top__container">
+			<div class="header-top__contact">
+				<?= $block->getContactInfo(); ?>
+			</div>
+			
+			<div class="header-top__links">
+				<?php foreach ($block->getCustomLinks() as $link): ?>
+					<a href="<?= $block->escapeUrl($block->getUrl($link['url'])); ?>" 
+					   <?php if (!empty($link['custom_color'])): ?>
+					   style="color: <?= $block->escapeHtmlAttr($link['custom_color']); ?>"
+					   <?php endif; ?>>
+						<?= $block->escapeHtml($link['text']); ?>
+					</a>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</div>
+<?php endif; ?>

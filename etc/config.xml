@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<cravendunnill_headertop>
+			<general>
+				<enabled>1</enabled>
+				<display_on>desktop</display_on>
+			</general>
+			<styles>
+				<background_color>#333333</background_color>
+				<text_color>#FFFFFF</text_color>
+				<link_color>#FFFFFF</link_color>
+				<link_hover_color>#CCCCCC</link_hover_color>
+			</styles>
+			<contact>
+				<phone_number>01746 761611</phone_number>
+				
+				<!-- Monday settings -->
+				<mon_enabled>1</mon_enabled>
+				<mon_open_time>08:00</mon_open_time>
+				<mon_close_time>17:00</mon_close_time>
+				
+				<!-- Tuesday settings -->
+				<tue_enabled>1</tue_enabled>
+				<tue_open_time>08:00</tue_open_time>
+				<tue_close_time>17:00</tue_close_time>
+				
+				<!-- Wednesday settings -->
+				<wed_enabled>1</wed_enabled>
+				<wed_open_time>08:00</wed_open_time>
+				<wed_close_time>17:00</wed_close_time>
+				
+				<!-- Thursday settings -->
+				<thu_enabled>1</thu_enabled>
+				<thu_open_time>08:00</thu_open_time>
+				<thu_close_time>17:00</thu_close_time>
+				
+				<!-- Friday settings -->
+				<fri_enabled>1</fri_enabled>
+				<fri_open_time>08:00</fri_open_time>
+				<fri_close_time>17:00</fri_close_time>
+				
+				<!-- Saturday settings -->
+				<sat_enabled>0</sat_enabled>
+				<sat_open_time>10:00</sat_open_time>
+				<sat_close_time>16:00</sat_close_time>
+				
+				<!-- Sunday settings -->
+				<sun_enabled>0</sun_enabled>
+				<sun_open_time>10:00</sun_open_time>
+				<sun_close_time>16:00</sun_close_time>
+				
+				<!-- Message formats -->
+				<open_message>Lines open until %close_time%: %phone%</open_message>
+				<closed_message>Lines open %next_day% from %open_time%: %phone%</closed_message>
+			</contact>
+			<links>
+				<item>
+					<text>Contact Us</text>
+					<url>contact</url>
+					<custom_color></custom_color>
+					<sort_order>10</sort_order>
+				</item>
+				<item>
+					<text>About Us</text>
+					<url>about-us</url>
+					<custom_color></custom_color>
+					<sort_order>20</sort_order>
+				</item>
+			</links>
+		</cravendunnill_headertop>
+	</default>
+</config>
