@@ -17,6 +17,11 @@ class Data extends AbstractHelper
 	const CONFIG_PATH = 'cravendunnill_headertop/';
 	
 	/**
+	 * London timezone
+	 */
+	const LONDON_TIMEZONE = 'Europe/London';
+	
+	/**
 	 * Day codes
 	 */
 	const DAYS = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
@@ -162,7 +167,7 @@ class Data extends AbstractHelper
 	public function getOpenMessageFormat($scopeType = ScopeInterface::SCOPE_STORE, $scopeCode = null)
 	{
 		$format = $this->getConfig('contact/open_message', $scopeType, $scopeCode);
-		return !empty($format) ? $format : 'Lines open until %close_time%: %phone%';
+		return !empty($format) ? $format : '<strong>Open until %close_time%</strong>:  %phone%';
 	}
 	
 	/**
@@ -175,7 +180,7 @@ class Data extends AbstractHelper
 	public function getClosedMessageFormat($scopeType = ScopeInterface::SCOPE_STORE, $scopeCode = null)
 	{
 		$format = $this->getConfig('contact/closed_message', $scopeType, $scopeCode);
-		return !empty($format) ? $format : 'Lines open %next_day% from %open_time%: %phone%';
+		return !empty($format) ? $format : '<strong>Open %next_day% from %open_time%</strong>:  %phone%';
 	}
 	
 	/**
@@ -250,13 +255,14 @@ class Data extends AbstractHelper
 	}
 	
 	/**
-	 * Get current day code
+	 * Get current day code using London time
 	 *
 	 * @return string Three letter day code (mon, tue, wed, etc.)
 	 */
 	public function getCurrentDayCode()
 	{
-		return strtolower(date('D'));
+		$datetime = new \DateTime('now', new \DateTimeZone(self::LONDON_TIMEZONE));
+		return strtolower($datetime->format('D'));
 	}
 	
 	/**
@@ -281,7 +287,7 @@ class Data extends AbstractHelper
 	}
 	
 	/**
-	 * Check if the phone line is currently open
+	 * Check if the phone line is currently open using London time
 	 *
 	 * @return bool
 	 */
@@ -294,9 +300,10 @@ class Data extends AbstractHelper
 			return false;
 		}
 		
-		// Get current time
-		$currentHour = (int)date('G');
-		$currentMinute = (int)date('i');
+		// Get current time in London timezone
+		$datetime = new \DateTime('now', new \DateTimeZone(self::LONDON_TIMEZONE));
+		$currentHour = (int)$datetime->format('G');
+		$currentMinute = (int)$datetime->format('i');
 		$currentTimeInMinutes = $currentHour * 60 + $currentMinute;
 		
 		// Get open and close times for current day
@@ -320,7 +327,7 @@ class Data extends AbstractHelper
 	}
 	
 	/**
-	 * Get the next open day information
+	 * Get the next open day information using London time
 	 *
 	 * @return array|null [day_code, day_name, open_time, close_time, formatted_open_time, formatted_close_time]
 	 */
@@ -336,16 +343,18 @@ class Data extends AbstractHelper
 		$daysChecked = 0;
 		$dayIndex = $currentDayIndex;
 		
+		// Get current London time
+		$datetime = new \DateTime('now', new \DateTimeZone(self::LONDON_TIMEZONE));
+		$currentHour = (int)$datetime->format('G');
+		$currentMinute = (int)$datetime->format('i');
+		$currentTimeInMinutes = $currentHour * 60 + $currentMinute;
+		
 		// First, check if the current day is enabled but we're before opening time
 		if ($this->isDayEnabled($currentDayCode)) {
 			$openTime = $this->getDayOpenTime($currentDayCode);
 			if (!empty($openTime)) {
 				list($openHour, $openMinute) = explode(':', $openTime);
 				$openTimeInMinutes = (int)$openHour * 60 + (int)$openMinute;
-				
-				$currentHour = (int)date('G');
-				$currentMinute = (int)date('i');
-				$currentTimeInMinutes = $currentHour * 60 + $currentMinute;
 				
 				if ($currentTimeInMinutes < $openTimeInMinutes) {
 					// Current day, but before opening time
@@ -385,13 +394,14 @@ class Data extends AbstractHelper
 	}
 	
 	/**
-	 * Get the contact information message based on current time
+	 * Get the contact information message based on current time in London timezone
 	 *
 	 * @return string
 	 */
 	public function getContactInfoMessage()
 	{
 		$phoneNumber = $this->getPhoneNumber();
+		$phoneLink = '<a href="tel:' . $phoneNumber . '">' . $phoneNumber . '</a>';
 		
 		if ($this->isPhoneLineOpen()) {
 			// Phone line is currently open
@@ -400,7 +410,7 @@ class Data extends AbstractHelper
 			
 			$message = $this->getOpenMessageFormat();
 			$message = str_replace('%close_time%', $closeTime, $message);
-			$message = str_replace('%phone%', $phoneNumber, $message);
+			$message = str_replace('%phone%', $phoneLink, $message);
 			
 			return $message;
 		} else {
@@ -411,12 +421,12 @@ class Data extends AbstractHelper
 				$message = $this->getClosedMessageFormat();
 				$message = str_replace('%next_day%', $nextOpenDay['day_name'], $message);
 				$message = str_replace('%open_time%', $nextOpenDay['formatted_open_time'], $message);
-				$message = str_replace('%phone%', $phoneNumber, $message);
+				$message = str_replace('%phone%', $phoneLink, $message);
 				
 				return $message;
 			} else {
 				// Fallback if no open days are configured
-				return 'Lines currently closed: ' . $phoneNumber;
+				return '<strong>Currently closed</strong>:  ' . $phoneLink;
 			}
 		}
 	}

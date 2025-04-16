@@ -172,11 +172,11 @@
 				</field>
 				<field id="open_message" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
 					<label>Open Message Format</label>
-					<comment>Use %phone% for phone number. Example: "Lines open until %close_time%: %phone%"</comment>
+					<comment>Use %phone% for phone number. Example: "&lt;strong&gt;Open until %close_time%&lt;/strong&gt;:  %phone%"</comment>
 				</field>
 				<field id="closed_message" translate="label" type="text" sortOrder="91" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
 					<label>Closed Message Format</label>
-					<comment>Use %phone% for phone number, %next_day% for next open day, %open_time% for next open time. Example: "Lines open %next_day% from %open_time%: %phone%"</comment>
+					<comment>Use %phone% for phone number, %next_day% for next open day, %open_time% for next open time. Example: "&lt;strong&gt;Open %next_day% from %open_time%&lt;/strong&gt;:  %phone%"</comment>
 				</field>
 			</group>
 			<group id="links" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
