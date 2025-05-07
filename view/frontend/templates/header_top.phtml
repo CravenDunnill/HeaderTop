@@ -71,4 +71,51 @@
 			</div>
 		</div>
 	</div>
+
+	<script type="text/x-magento-init">
+	{
+		".header-top": {
+			"CravenDunnill_HeaderTop/js/header-top": {
+				"phoneNumber": "<?= $block->escapeJs($block->getPhoneNumber()); ?>",
+				"days": {
+					"mon": {
+						"enabled": <?= $block->getHelper()->isDayEnabled('mon') ? 'true' : 'false' ?>,
+						"openTime": "<?= $block->escapeJs($block->getHelper()->getDayOpenTime('mon')); ?>",
+						"closeTime": "<?= $block->escapeJs($block->getHelper()->getDayCloseTime('mon')); ?>"
+					},
+					"tue": {
+						"enabled": <?= $block->getHelper()->isDayEnabled('tue') ? 'true' : 'false' ?>,
+						"openTime": "<?= $block->escapeJs($block->getHelper()->getDayOpenTime('tue')); ?>",
+						"closeTime": "<?= $block->escapeJs($block->getHelper()->getDayCloseTime('tue')); ?>"
+					},
+					"wed": {
+						"enabled": <?= $block->getHelper()->isDayEnabled('wed') ? 'true' : 'false' ?>,
+						"openTime": "<?= $block->escapeJs($block->getHelper()->getDayOpenTime('wed')); ?>",
+						"closeTime": "<?= $block->escapeJs($block->getHelper()->getDayCloseTime('wed')); ?>"
+					},
+					"thu": {
+						"enabled": <?= $block->getHelper()->isDayEnabled('thu') ? 'true' : 'false' ?>,
+						"openTime": "<?= $block->escapeJs($block->getHelper()->getDayOpenTime('thu')); ?>",
+						"closeTime": "<?= $block->escapeJs($block->getHelper()->getDayCloseTime('thu')); ?>"
+					},
+					"fri": {
+						"enabled": <?= $block->getHelper()->isDayEnabled('fri') ? 'true' : 'false' ?>,
+						"openTime": "<?= $block->escapeJs($block->getHelper()->getDayOpenTime('fri')); ?>",
+						"closeTime": "<?= $block->escapeJs($block->getHelper()->getDayCloseTime('fri')); ?>"
+					},
+					"sat": {
+						"enabled": <?= $block->getHelper()->isDayEnabled('sat') ? 'true' : 'false' ?>,
+						"openTime": "<?= $block->escapeJs($block->getHelper()->getDayOpenTime('sat')); ?>",
+						"closeTime": "<?= $block->escapeJs($block->getHelper()->getDayCloseTime('sat')); ?>"
+					},
+					"sun": {
+						"enabled": <?= $block->getHelper()->isDayEnabled('sun') ? 'true' : 'false' ?>,
+						"openTime": "<?= $block->escapeJs($block->getHelper()->getDayOpenTime('sun')); ?>",
+						"closeTime": "<?= $block->escapeJs($block->getHelper()->getDayCloseTime('sun')); ?>"
+					}
+				}
+			}
+		}
+	}
+	</script>
 <?php endif; ?>

@@ -51,8 +51,8 @@
 				<sun_close_time>16:00</sun_close_time>
 				
 				<!-- Message formats -->
-				<open_message><![CDATA[<strong>Open until %close_time%</strong>:  %phone%]]></open_message>
-				<closed_message><![CDATA[<strong>Open %next_day% from %open_time%</strong>:  %phone%]]></closed_message>
+				<open_message><![CDATA[<strong>Open until %close_time%</strong>  %phone%]]></open_message>
+				<closed_message><![CDATA[<strong>Open %next_day% from %open_time%</strong>  %phone%]]></closed_message>
 			</contact>
 			<links>
 				<item>

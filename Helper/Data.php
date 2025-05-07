@@ -167,7 +167,7 @@ class Data extends AbstractHelper
 	public function getOpenMessageFormat($scopeType = ScopeInterface::SCOPE_STORE, $scopeCode = null)
 	{
 		$format = $this->getConfig('contact/open_message', $scopeType, $scopeCode);
-		return !empty($format) ? $format : '<strong>Open until %close_time%</strong>:  %phone%';
+		return !empty($format) ? $format : '<strong>Open until %close_time%</strong>  %phone%';
 	}
 	
 	/**
@@ -180,7 +180,7 @@ class Data extends AbstractHelper
 	public function getClosedMessageFormat($scopeType = ScopeInterface::SCOPE_STORE, $scopeCode = null)
 	{
 		$format = $this->getConfig('contact/closed_message', $scopeType, $scopeCode);
-		return !empty($format) ? $format : '<strong>Open %next_day% from %open_time%</strong>:  %phone%';
+		return !empty($format) ? $format : '<strong>Open %next_day% from %open_time%</strong>  %phone%';
 	}
 	
 	/**
@@ -426,7 +426,7 @@ class Data extends AbstractHelper
 				return $message;
 			} else {
 				// Fallback if no open days are configured
-				return '<strong>Currently closed</strong>:  ' . $phoneLink;
+				return '<strong>Currently closed</strong>  ' . $phoneLink;
 			}
 		}
 	}

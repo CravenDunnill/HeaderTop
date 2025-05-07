@@ -32,6 +32,16 @@ class HeaderTop extends Template
 	}
 	
 	/**
+	 * Get helper
+	 *
+	 * @return Data
+	 */
+	public function getHelper()
+	{
+		return $this->helper;
+	}
+	
+	/**
 	 * Check if header top is enabled
 	 *
 	 * @return bool
